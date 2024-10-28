@@ -1,0 +1,83 @@
+﻿<UserControl x:Class="BookU_GUILayer.View.Views.SearchView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BookU_GUILayer.View.Views"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks" xmlns:xctk1="http://schemas.xceed.com/wpf/xaml/toolkit"
+             mc:Ignorable="d" 
+             d:DesignHeight="200" d:DesignWidth="680">
+    <UserControl.Resources>
+        <Style x:Key="Mode_btnStyle" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#66242526"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#66242526"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" 
+                    Command="{Binding SearchUser_Btn}" 
+                    Style="{DynamicResource Mode_btnStyle}">
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="{iconPacks:PackIcon {x:Static iconPacks:PackIconBootstrapIconsKind.Search}, Height=37, Width=36}" 
+                           Foreground="#FF9A9B9C"/>
+                    <Label Content="{iconPacks:PackIcon {x:Static iconPacks:PackIconBootstrapIconsKind.Person}, Height=37, Width=36}"
+                           Foreground="#FF9A9B9C"/>
+                </StackPanel>
+            </Button>
+
+            <Button Grid.Column="1" 
+                    Command="{Binding SearchPost_Btn}"
+                    Style="{DynamicResource Mode_btnStyle}">
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="{iconPacks:PackIcon {x:Static iconPacks:PackIconBootstrapIconsKind.Search}, Height=37, Width=36}"
+                           Foreground="#FF9A9B9C"/>
+                    <Label Content="{iconPacks:PackIcon {x:Static iconPacks:PackIconBootstrapIconsKind.ChatDots}, Height=37, Width=36}"
+                           Foreground="#FF9A9B9C"/>
+                </StackPanel>
+            </Button>
+        </Grid>
+
+        <xctk1:WatermarkTextBox Margin="20" Grid.Row="1" MaxHeight="100"
+                                HorizontalContentAlignment="Center"
+                                VerticalContentAlignment="Center"
+                                TextWrapping="WrapWithOverflow"
+                                Watermark="Write your search keyword here..."
+                                Background="Transparent" BorderBrush="Transparent"
+                                Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                                FontFamily="{StaticResource Main.FontFamily}"
+                                Foreground="{StaticResource Foreground}"
+                                Visibility="{Binding SearchInput}"/>
+    </Grid>
+</UserControl>

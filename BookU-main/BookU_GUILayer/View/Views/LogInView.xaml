@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="BookU_GUILayer.View.Views.LogInView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BookU_GUILayer.View.Views"
+             xmlns:components="clr-namespace:BookU_GUILayer.View.Components"
+             xmlns:xctk1="http://schemas.xceed.com/wpf/xaml/toolkit"
+             mc:Ignorable="d" 
+             d:DesignHeight="860" d:DesignWidth="680">
+    <Grid>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            
+            <Label Content="Welcome to BookU" FontWeight="Light" FontSize="60"
+                   FontFamily="{StaticResource Main.FontFamily}"
+                   Foreground="{StaticResource Foreground}"/>
+            
+            <Label Content="The unofficial SNS for Univerity of Borås"
+                   FontSize="17" FontWeight="Light" Margin="0,20,0,70"
+                   HorizontalContentAlignment="Center"
+                   FontFamily="{StaticResource Main.FontFamily}"
+                   Foreground="{StaticResource Foreground}"/>
+            
+            <xctk1:WatermarkTextBox Text="{Binding Email}"
+                                    FontFamily="{StaticResource Main.FontFamily}" 
+                                    TextAlignment="Center" HorizontalContentAlignment="Center"
+                                    Padding="7" Width="300" Margin="0,0,0,10"
+                                    Watermark="s******@student.hb.se"/>
+            
+            <components:BindablePasswordBox Password="{Binding Password}" Width="300"/>
+            
+            <Grid Margin="0,30" Width="300">
+                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+                <Button Command="{Binding LogIn_Btn}"
+                        Style="{DynamicResource Buttonstyle}"
+                        Content="Log in" Margin="0,0,10,0"/>
+                
+                <Button Command="{Binding SignUp_Btn}" 
+                        Style="{DynamicResource Buttonstyle}"
+                        Content="Sign Up" Grid.Column="1" Margin="10,0,0,0"/>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</UserControl>

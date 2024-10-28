@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="BookU_GUILayer.View.Views.SignUpView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"  
+             xmlns:local="clr-namespace:BookU_GUILayer.View.Views" 
+             xmlns:xctk1="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:components="clr-namespace:BookU_GUILayer.View.Components"
+             mc:Ignorable="d" 
+             d:DesignHeight="860" d:DesignWidth="680">
+
+
+    <StackPanel Orientation="Vertical"
+                HorizontalAlignment="Center" VerticalAlignment="Center">
+        
+        <Label Content="Welcome to BookU"
+               FontSize="60" FontWeight="Light"
+               Foreground="{StaticResource Foreground}"/>
+
+        <StackPanel Margin="80,20">
+            <xctk1:WatermarkTextBox Text="{Binding Email}"
+                                    Padding="7" Margin="0,0,0,10"
+                                    TextAlignment="Center"
+                                    Watermark="s******@student.hb.se"
+                                    HorizontalContentAlignment="Center"/>
+
+            <components:BindablePasswordBox Password="{Binding Password}"/>
+
+            <xctk1:WatermarkTextBox Text="{Binding Name}"
+                                    TextAlignment="Center"
+                                    Margin="0,10,0,0" Padding="7"
+                                    Watermark="Your Name"
+                                    HorizontalContentAlignment="Center"/>
+
+            <xctk1:WatermarkTextBox Text="{Binding SNumber}"
+                                    TextAlignment="Center"
+                                    Padding="7" Margin="0,10"
+                                    Watermark ="Your S-number"
+                                    HorizontalContentAlignment="Center"/>
+
+            <xctk1:WatermarkTextBox Text="{Binding AttendingProgram}"
+                                    TextAlignment="Center" Padding="7"
+                                    Watermark="Your Attending Program"
+                                    HorizontalContentAlignment="Center"/>
+
+            <Label Content="Your Birthday: " Margin="0,10,0,0" 
+                   Foreground="{StaticResource Foreground}"/>
+            
+            <DatePicker SelectedDate="{Binding BirthDay}"
+                        IsTodayHighlighted="True"
+                        BorderThickness="0" DisplayDateStart="1900-01-01"
+                        DisplayDateEnd="{Binding Today, Mode=OneTime}"/>
+            
+            <Button Content="Confirm" Margin="100,20"
+                    Style="{DynamicResource Buttonstyle}"
+                    Command="{Binding Confirm_Btn}"/>
+        </StackPanel>
+    </StackPanel>
+</UserControl>

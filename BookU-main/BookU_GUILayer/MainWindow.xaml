@@ -1,0 +1,132 @@
+﻿<Window x:Class="BookU_GUILayer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:BookU_GUILayer.ViewModels"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        mc:Ignorable="d"
+        Title="MainWindow" 
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        Height="690" 
+        Width="870"
+        MinHeight="690"
+        MinWidth="850"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ResizeMode="CanResizeWithGrip">
+
+    <Window.Resources>
+        <!--#region Bell Notification Button Style-->
+        <Style x:Key="Notification_btnStyle" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{StaticResource Warning.Red}"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Main.Background}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Main.Background}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{StaticResource Button.Figure.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!--#endregion-->
+    </Window.Resources>
+
+    <Grid  Background="{StaticResource Main.Background}">
+        <Grid.Effect>
+            <DropShadowEffect BlurRadius="30" ShadowDepth="2"
+                              Direction="-90" Color="#FF9A9B9C"/>
+        </Grid.Effect>
+
+        <DockPanel VerticalAlignment="Stretch">
+
+            <!--#region Header with buttons-->
+            <Grid Height="100"
+                  DockPanel.Dock="Top"
+                  Background="{StaticResource Main.Content.Background}">
+
+                <DockPanel>
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center">
+                        <Button Margin="90,0,0,0" HorizontalAlignment="Left"
+                                Content="{iconPacks:PackIcon {x:Static iconPacks:PackIconBootstrapIconsKind.Person}, Width=32, Height=32}"
+                                Command="{Binding Profile_Btn}"
+                                Style="{DynamicResource Home_btnStyle}"/>
+
+                        <Button Margin="70,0,0,0"
+                                Content="{iconPacks:PackIcon {x:Static iconPacks:PackIconBootstrapIconsKind.ChatDots}, Width=32, Height=32}"
+                                Command="{Binding MakePost_Btn}" 
+                                Style="{DynamicResource Home_btnStyle}"/>
+
+                        <Button Margin="70,0,0,0" 
+                                Content="{iconPacks:PackIcon {x:Static iconPacks:PackIconBootstrapIconsKind.Search}, Width=32, Height=32}"
+                                Command="{Binding Search_Btn}"
+                                Style="{DynamicResource Home_btnStyle}"/>
+
+                        <Button Margin="70,0,0,0" HorizontalAlignment="Right"
+                                Content="{iconPacks:PackIcon {x:Static iconPacks:PackIconBootstrapIconsKind.BoxArrowRight}, Width=32, Height=32}"
+                                Command="{Binding SignOut_Btn}"
+                                Style="{DynamicResource Home_btnStyle}"/>
+                    </StackPanel>
+
+                    <Button Margin="0,0,20,0" DockPanel.Dock="Right"
+                            HorizontalAlignment="Right" Click="ExitProgram"
+                            Content="{iconPacks:PackIcon {x:Static iconPacks:PackIconBootstrapIconsKind.XCircle}, Width=32, Height=32}"
+                            Style="{DynamicResource Exit_btnStyle}"/>
+                </DockPanel>
+            </Grid>
+            <!--#endregion-->
+
+            <!--#region  Left Tab-->
+            <Grid Width="80" DockPanel.Dock="Left"
+                  Background="{StaticResource Main.Content.Background}">
+                
+                <Button FontSize="26" Width="200" Content="BookU"
+                        FontFamily="{StaticResource Main.FontFamily}"
+                        Foreground="{StaticResource Foreground}"
+                        Command="{Binding Home_Btn}"
+                        Style="{DynamicResource Home_btnStyle}">
+                    
+                    <Button.LayoutTransform>
+                        <RotateTransform Angle="270"/>
+                    </Button.LayoutTransform>
+                </Button>
+                <Button Height="80" VerticalAlignment="Bottom"
+                        Command="{Binding Notifcation_Btn, UpdateSourceTrigger=PropertyChanged}"
+                        Content="{iconPacks:PackIcon {x:Static iconPacks:PackIconBootstrapIconsKind.BellFill}, Width=33, Height=32}" 
+                        Style="{DynamicResource Notification_btnStyle}"/>
+            </Grid>
+            <!--#endregion-->
+
+            <!--#region Content-->
+            <DockPanel HorizontalAlignment="Center">
+                <ContentControl Content="{Binding Tools}"
+                                Visibility="{Binding ToolsVisibility}"
+                                DockPanel.Dock="Top"/>
+                <ContentControl Content="{Binding SelectedViewModel}"
+                                DockPanel.Dock="Bottom"/>
+            </DockPanel>
+            <!--#endregion-->
+
+        </DockPanel>
+    </Grid>
+</Window>

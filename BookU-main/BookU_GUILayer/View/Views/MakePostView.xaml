@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="BookU_GUILayer.View.Views.MakePostView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BookU_GUILayer.View.Views"
+             xmlns:xctk1="http://schemas.xceed.com/wpf/xaml/toolkit"
+             mc:Ignorable="d" 
+             d:DesignHeight="200" d:DesignWidth="680">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <xctk1:WatermarkTextBox Grid.Row="0" Margin="20,20,20,0"
+                                TextWrapping="WrapWithOverflow"
+                                Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}"
+                                FontFamily="{StaticResource Main.FontFamily}"/>
+        
+        <Grid Grid.Row="1" Height="40">
+            <Label Margin="30,0,0,0" Width="130"  
+                   HorizontalAlignment="Left" 
+                   Content="Current Picture Path:" 
+                   Foreground="{StaticResource Foreground}"/>
+            <Label Margin="190,0,0,0"  
+                   Content="{Binding ImagePath, UpdateSourceTrigger=PropertyChanged}" 
+                   Foreground="{StaticResource Foreground}"/>
+        </Grid>
+        
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Content="Confirm" Grid.Column="0" Margin="40,10"
+                    Style="{DynamicResource Buttonstyle}"
+                    Command="{Binding ConfirmAddPost_Btn}"/>
+            <Button Content="Add picture" Grid.Column="1" Margin="40,10"
+                    Style="{DynamicResource Buttonstyle}"
+                    Command="{Binding AddPicture_Btn}"/>
+        </Grid>
+    </Grid>
+</UserControl>
